@@ -37,6 +37,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id/edit' do #loads form to edit
     if logged_in?
+      binding.pry
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.user_id == current_user.id
         erb :'tweets/edit_tweet'
@@ -47,7 +48,6 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do #updates tweet entry in database
-    binding.pry
     if params[:content] == ""
       redirect to "/tweets/#{params[:id]}/edit"
     else
