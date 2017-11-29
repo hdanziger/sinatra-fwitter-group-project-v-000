@@ -38,7 +38,7 @@ class TweetsController < ApplicationController
   get '/tweets/:id/edit' do #loads form to edit
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == @current_user.id
+      if @tweet.user_id == current_user.id
         erb :'tweets/edit_tweet'
       end
     else
@@ -59,5 +59,15 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets/:id/delete' do #loads delete form(just a submit button) on show page
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      if @tweet.user_id == current_user.id
+        @tweet.delete
+      redirect to '/tweets'
+    else
+      redirect to '/tweets'
+    end
+  else
+    redirect to '/login'
   end
 end
