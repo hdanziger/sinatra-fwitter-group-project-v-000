@@ -57,7 +57,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/:id/delete' do #loads delete form(just a submit button) on show page
+  delete '/tweets/:id/delete' do #loads delete form(just a submit button) on show page
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.user_id == current_user.id
