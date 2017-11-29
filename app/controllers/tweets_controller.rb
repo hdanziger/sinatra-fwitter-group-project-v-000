@@ -35,17 +35,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/:id' do #updates tweet entry in database
-    if params[:content] == ""
-      redirect to "/tweets/#{params[:id]}/edit"
-    else
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.content = params[:content]
-      @tweet.save
-      redirect to "/tweets/#{@tweet.id}"
-    end
-  end
-
   get '/tweets/:id/edit' do #loads form to edit
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
@@ -57,6 +46,16 @@ class TweetsController < ApplicationController
     end
   end
 
+  post '/tweets/:id' do #updates tweet entry in database
+    if params[:content] == ""
+      redirect to "/tweets/#{params[:id]}/edit"
+    else
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect to "/tweets/#{@tweet.id}"
+    end
+  end
 
   post '/tweets/:id/delete' do #loads delete form(just a submit button) on show page
     if logged_in?
