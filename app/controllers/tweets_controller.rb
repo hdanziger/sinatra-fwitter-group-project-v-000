@@ -38,6 +38,7 @@ class TweetsController < ApplicationController
   get '/tweets/:id/edit' do #loads form to edit
     if logged_in?
       @tweet = Tweet.find_by(id: params[:id], content: params[:content])
+      binding.pry
       if @tweet.user_id == current_user.id
         erb :'tweets/edit_tweet'
       end
