@@ -46,7 +46,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/:id' do #updates tweet entry in database
+  patch '/tweets/:id' do #updates tweet entry in database
     if params[:content] == ""
       redirect to "/tweets/#{params[:id]}/edit"
     else
